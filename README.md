@@ -1,0 +1,1 @@
+Um simple crate para adicionar o capítulo do nome da pasta pai aos nomes dos arquivos e pasta filhas
