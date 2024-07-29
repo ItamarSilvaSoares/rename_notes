@@ -13,7 +13,8 @@ fn integration_test() {
     
     create_file_folder_to_test(&dir_t);
     
-    rename_files_and_folder(&dir_t.path().to_str().unwrap(), None, None);
+    
+    let _ = rename_files_and_folder(&dir_t.path().to_str().unwrap(), None, None);
     
     let results = get_folder_file_names(&dir_t.path().to_str().unwrap(), None);
     let results = results.iter().collect::<Counter<_>>();
