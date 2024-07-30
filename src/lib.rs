@@ -37,6 +37,11 @@ pub fn rename_files_and_folder(path_folder: &str, chapter_number: Option<&u32>, 
         };
 
         let chapter_number: u32 = get_chapter(&folder_name, chapter_number)?;
+
+        if chapter_number == 0 {
+            continue
+        }
+
         let old_name = format!("{}/{}", &path_folder, &folder_name);
 
         if (!start_with_chapter(&folder_name) && flag == 1
@@ -46,7 +51,9 @@ pub fn rename_files_and_folder(path_folder: &str, chapter_number: Option<&u32>, 
             continue;
         }
 
+
         let new_name = format!("{}/{}.{}", &path_folder, chapter_number, folder_name);
+
 
         rename(old_name, new_name)?;
 
@@ -73,6 +80,10 @@ impl From<io::Error> for AppErrors {
 }
 
 fn get_chapter(folder_name: &str, chapter_number: Option<&u32>) -> Result<u32, AppErrors> {
+    if folder_name == RESOURCES && chapter_number.is_none() {
+        return Ok(0)
+    }
+
     match chapter_number {
         Some(&i) => Ok(i),
         None => {
@@ -128,6 +139,15 @@ mod tests {
 
         assert_err!(get_chapter(folder_name, None), Err(AppErrors::RegexError))
     }
+
+    #[test]
+    fn get_chapter_folder_name_igual_resource () {
+        let folder_name = "_resources";
+
+        let chapter_number = get_chapter(&folder_name, None).unwrap();
+
+        assert_eq!(chapter_number, 0);
+}
 
     #[test]
     fn start_with_chapter_false() {
