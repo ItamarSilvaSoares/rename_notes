@@ -29,7 +29,8 @@ fn integration_test_with_sub_notes() {
         "02 - tmp",
         "2.00 - test.md",
         "04 - tmp",
-        "4.3.1.00 - test.md"
+        "4.3.1.00 - test.md",
+        "Introdução.md"
         ].iter().map(|&s| s.to_string()).collect();
         
     let expect = expect.iter().collect::<Counter<_>>();
