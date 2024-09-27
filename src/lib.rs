@@ -18,7 +18,10 @@ fn get_flag(flag: Option<u8>) -> u8 {
     flag.unwrap_or(1)
 }
 
-pub fn rename_files_and_folder(path_folder: &str, chapter_number: Option<&u32>, flag: Option<u8>) -> Result<(), AppErrors> {
+pub fn rename_files_and_folder(
+    path_folder: &str,
+    chapter_number: Option<&u32>,
+    flag: Option<u8>) -> Result<(), AppErrors> {
     let flag = get_flag(flag);
     let paths = fs::read_dir(&path_folder)
         .expect(MsgErros::ReadDirError.msg());
@@ -27,7 +30,10 @@ pub fn rename_files_and_folder(path_folder: &str, chapter_number: Option<&u32>, 
     for path in paths {
         let folder_name = path?.file_name();
         let folder_name = folder_name.to_str()
-            .ok_or(AppErrors::IoError(io::Error::new(io::ErrorKind::Other, MsgErros::FolderNameError.msg())))?;
+            .ok_or(AppErrors::IoError(
+                io::Error::new(
+                    io::ErrorKind::Other,
+                    MsgErros::FolderNameError.msg())))?;
 
         let old_name = format!("{}/{}", &path_folder, &folder_name);
         let is_file_bool = Path::new(&old_name).is_file();
