@@ -8,6 +8,8 @@ use regex::Regex;
 use crate::messages::{MsgErros, RESOURCES};
 
 pub mod messages;
+pub mod change_capitule;
+
 
 lazy_static::lazy_static! {
         static ref RE: Regex = Regex::new(r"^\d{1,2}").unwrap();

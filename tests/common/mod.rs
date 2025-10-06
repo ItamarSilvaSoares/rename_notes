@@ -26,11 +26,11 @@ pub fn get_folder_file_names(path: &str, flag: Option<u8>) -> Vec<String> {
     results
 }
 
-pub fn create_folder_to_test(dir_t: &TempDir, resource: Option<&str>, dirs: [&str; 3]) {
+pub fn create_folder_to_test(dir_t: &TempDir, resource: Option<&str>, dirs: &[&str]) {
     for (index, dir) in dirs.iter().enumerate() {
         let tmp = &dir_t.path().to_str().unwrap();
 
-        let folder = format!("{}/{}", &tmp, dir);
+        let folder = format!("{}/{}", &tmp ,dir);
         fs::create_dir(&folder).expect("falha ao criar as pastas");
 
         let mut file = format!("{}/00 - test.md", &folder);

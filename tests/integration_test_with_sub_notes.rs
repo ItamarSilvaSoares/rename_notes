@@ -11,7 +11,7 @@ mod common;
 fn integration_test_with_sub_notes() {
     let dir_t = tempdir().unwrap();
     let dirs = ["01 - tmp", "02 - tmp", "04 - tmp"];
-    common::create_folder_to_test(&dir_t, None, dirs);
+    common::create_folder_to_test(&dir_t, None, &dirs);
     
     match rename_files_and_folder(&dir_t.path().to_str().unwrap(), None, None) {
         Ok(_) => {}
@@ -35,5 +35,5 @@ fn integration_test_with_sub_notes() {
         
     let expect = expect.iter().collect::<Counter<_>>();
 
-    assert_eq!(expect, result);
+    assert_eq!(result, expect);
 }

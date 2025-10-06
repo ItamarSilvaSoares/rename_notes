@@ -13,7 +13,7 @@ fn integration_test_with_sub_dirs() {
     let dir_t = tempdir().unwrap();
     let dirs = ["01 - tmp", "02 - tmp", "03.1 - tmp"];
 
-    create_folder_to_test(&dir_t, Some("_resources/01 - res"), dirs);
+    create_folder_to_test(&dir_t, Some("_resources/01 - res"), &dirs);
     
     
     match rename_files_and_folder(&dir_t.path().to_str().unwrap(), None, None) {
@@ -44,6 +44,6 @@ fn integration_test_with_sub_dirs() {
     
     let expect = expect.iter().collect::<Counter<_>>();
     
-    assert_eq!(expect, results);
+    assert_eq!(results, expect);
 
 }
